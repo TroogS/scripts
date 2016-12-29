@@ -1,0 +1,40 @@
+#!/bin/bash
+export XAUTHORITY=/home/luxick/.Xauthority
+export DISPLAY=:0.0
+
+# Device that appears only in docked mode (USBDeveices, etc)
+IDENTIFIER_DEVICE="/dev/disk/by-uuid/840f4c9f-bbf4-4d92-972f-8ec827bd36dc"
+DOCKING_STATUS=0
+
+# Change Wallpaper when docked/undocked
+WALLPAPER_DOCKED="./docked.png"
+WALLPAPER_UNDOCKED="./undocked.png"
+
+echo "Thinkpad Dock detection started"
+
+while [[ true ]]; do
+    if [ -e "$IDENTIFIER_DEVICE" ]; then
+        if [[ $DOCKING_STATUS = 0 ]]; then
+
+            while [[ ! $(xrandr | grep HDMI3 | grep connected) ]]; do
+                sleep 0.5s
+            done
+
+            #xrandr --output HDMI3 --primary --auto --pos 1280x0 --output LVDS1 --mode 1280x800 --pos 0x0 
+            ~/.screenlayout/dock.sh
+            feh --bg-scale $WALLPAPER_DOCKED
+            #i3-msg workspace 9:www &>/dev/null; i3-msg move workspace to output left &>/dev/null; i3-msg workspace back_and_forth &>/dev/null
+            #i3-msg workspace 10:mail &>/dev/null; i3-msg move workspace to output left &>/dev/null; i3-msg workspace back_and_forth &>/dev/null
+            DOCKING_STATUS=1
+            echo `date` "Thinkpad Docked"
+        fi
+    else
+        if [[ $DOCKING_STATUS == 1 ]]; then
+            ~/.screenlayout/undock.sh
+            feh --bg-scale $WALLPAPER_UNDOCKED
+            DOCKING_STATUS=0
+            echo `date` "Thinkpad Undocked"
+        fi
+    fi
+    sleep 1s
+done

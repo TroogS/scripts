@@ -1,0 +1,44 @@
+#!/bin/bash
+# In auto mode the fan does not use the maximum speed when temerature is 
+# high, this script manually set fan speed to full-speed/ returns ist to
+# auto mode.
+start() {
+    echo "Starting Service"
+    while : 
+    do
+        CURRENTSPEED=`cat /proc/acpi/ibm/fan | grep level: | awk 'NF>1{print $NF}'`
+        CURRENTTMP=`cat /proc/acpi/ibm/thermal | grep -o -E '[0-9]+' | sed -n '1p'`
+        if  [ $CURRENTTMP -gt 80 ]; then
+            echo "level full-speed" > /proc/acpi/ibm/fan
+            RETURN="$CURRENTSPEED -> disengaged"
+        elif [ $CURRENTTMP -lt 65 ]; then
+            echo "level auto" > /proc/acpi/ibm/fan
+            RETURN="$CURRENTSPEED -> auto"
+        fi
+        sleep 5
+    done
+}
+
+stop() {
+    echo "Stopping Service"
+    killall fancontrol
+}
+
+case "$1" in 
+    start)
+        start &
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        ;;
+    restart|reload|condrestart)
+        stop
+        start &
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|restart|reload|status}"
+        exit 1
+esac
+exit 0
