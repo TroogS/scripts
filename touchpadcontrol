@@ -1,0 +1,35 @@
+#!/bin/bash
+# Enable or diable Thinkpad Touchpad
+
+toggle() {
+    STATUS=`xinput list-props 'SynPS/2 Synaptics TouchPad' | grep 139 | grep -o ".$"`
+    if [ $STATUS  = "1" ]; then
+        xinput set-prop 'SynPS/2 Synaptics TouchPad' 139 0
+    else
+        xinput set-prop 'SynPS/2 Synaptics TouchPad' 139 1  
+    fi
+}
+
+deactivate() {
+    xinput set-prop 'SynPS/2 Synaptics TouchPad' 139 0
+}
+
+activate() {
+    xinput set-prop 'SynPS/2 Synaptics TouchPad' 139 1
+}
+
+case "$1" in
+    toggle)
+        toggle
+        ;;
+    disable)
+        deactivate
+        ;;
+    enable)
+        activate
+        ;;
+    *)
+        echo $"Usage: $0 {enable|disable|toggle}"
+        exit 1
+esac
+exit 0
