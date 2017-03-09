@@ -1,0 +1,10 @@
+[Unit]
+Description=Monitor and control fan speed
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/fancontrol start
+ExecStop=/usr/bin/fancontrol stop
+
+[Install]
+WantedBy=multi-user.target

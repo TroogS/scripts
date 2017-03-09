@@ -4,6 +4,7 @@
 # auto mode.
 start() {
     echo "Starting Service"
+    chmod 744 /proc/acpi/ibm/fan
     while : 
     do
         CURRENTSPEED=`cat /proc/acpi/ibm/fan | grep level: | awk 'NF>1{print $NF}'`
