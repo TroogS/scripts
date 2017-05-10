@@ -1,0 +1,12 @@
+[Unit]
+Description=Speed up Trackpoint
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/speed-up-trackpoint
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
+
