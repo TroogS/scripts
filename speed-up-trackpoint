@@ -1,12 +1,12 @@
 #!/bin/bash
 # Set Trackpoint sensetivity and speed up
-TPDEV="/sys/devices/platform/i8042/serio1/serio2"
+TPDEV="/sys/devices/platform/i8042/serio1"
 while true
 do
     if [ -d "$TPDEV" ]; then
         echo "Configuring Trackpoint"
-        echo -n 255     > $TPDEV/sensitivity     # Integer  128   Sensitivity
-        echo -n 255     > $TPDEV/speed           # Integer  97   Cursor speed
+        echo -n 200     > $TPDEV/sensitivity     # Integer  128   Sensitivity
+        echo -n 200     > $TPDEV/speed           # Integer  97   Cursor speed
         echo -n 4       > $TPDEV/inertia         # Integer  6   Negative intertia
         echo "Done."
         exit 0
