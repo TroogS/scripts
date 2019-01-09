@@ -19,9 +19,9 @@ def img2tables(img_file, width=None, height=None) -> str:
 
     html = """
     <html>
-        <body bgcolor=000000><table border=0 cellpadding=0 cellspacing=0>
+        <body bgcolor=000000>
+            <table border=0 cellpadding=0 cellspacing=0>
     """
-    print(f'Converting "{img_file}"')
     for row in bar.ChargingBar('Running').iter(range(size_y)):
         html += '<tr height=1>'
         for col in range(size_x):
@@ -76,6 +76,7 @@ if __name__ == '__main__':
     if args.size:
         size = args.size
 
+    print(f'Starting conversion of "{args.image_path}"')
     try:
         html = img2tables(args.image_path, *size)
     except KeyboardInterrupt:
