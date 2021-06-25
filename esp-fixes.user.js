@@ -11,6 +11,17 @@
 // @grant GM_getValue
 // ==/UserScript==
 
+function addGlobalStyle(css) {
+    var head, style;
+    head = document.getElementsByTagName('head')[0];
+    if (!head) { return; }
+    style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = css;
+    head.appendChild(style);
+}
+
+
 // Force popups into new tabs instead
 function OnlyTabs(url, width, heigth) {
     window.open(url, "_blank");
@@ -29,8 +40,25 @@ function clearViewState(){
     document.getElementById("__EVENTVALIDATION").value = null;
 }
 
+var css = `
+.sidebar {
+  flex 0 1 12%;
+}
+
+.sidebar .panel-heading {
+  padding: 2px 10px;
+}
+
+.sidebar .nav > li > a {
+  padding: 0;
+}
+`;
+
 (function () {
     'use strict';
+
+    // Add custom CSS
+    addGlobalStyle(css);
 
     // Never open Popup windows
     NewWindowWithoutControls = OnlyTabs
