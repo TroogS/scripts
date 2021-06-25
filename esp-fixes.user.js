@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ESP Fixes
 // @namespace    https://esp.eas-cpq.de/
-// @version      1.2
+// @version      1.3
 // @description  Collection of fixes for the EAS Service Portal
 // @updateURL    https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
 // @downloadURL  https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
@@ -43,6 +43,7 @@ function clearViewState(){
 var css = `
 .sidebar {
   flex 0 1 12%;
+  max-width: 200px;
 }
 
 .sidebar .panel-heading {
