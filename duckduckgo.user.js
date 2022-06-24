@@ -18,5 +18,5 @@
 })();
 
 function updateTitle(){
-    document.title = document.getElementById("search_form_input").value;
+    document.title = document.getElementById("search_form_input").value + " - Search";
 }
