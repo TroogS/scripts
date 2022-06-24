@@ -2,6 +2,8 @@
 // @name         DuckDuckGo Tab Title
 // @namespace    http://tampermonkey.net/
 // @version      1
+// @updateURL    https://github.com/luxick/scripts/raw/master/duckduckgo.user.js
+// @downloadURL  https://github.com/luxick/scripts/raw/master/duckduckgo.user.js
 // @description  Sets the title of the tab when using the POST method for searching
 // @author       luxick
 // @match        https://duckduckgo.com/*
