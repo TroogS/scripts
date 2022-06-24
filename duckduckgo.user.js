@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DuckDuckGo Tab Title
 // @namespace    http://tampermonkey.net/
-// @version      1
+// @version      2
 // @updateURL    https://github.com/luxick/scripts/raw/master/duckduckgo.user.js
 // @downloadURL  https://github.com/luxick/scripts/raw/master/duckduckgo.user.js
 // @description  Sets the title of the tab when using the POST method for searching
