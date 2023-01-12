@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ESP Fixes
 // @namespace    https://esp.eas-cpq.de/
-// @version      1.5
+// @version      1.7
 // @description  Collection of fixes for the EAS Service Portal
 // @updateURL    https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
 // @downloadURL  https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
@@ -28,11 +28,18 @@ function OnlyTabs(url, width, heigth) {
 }
 
 // Set title of the tab to number and description of the task
-function fixTitle(){
-    var header = document.getElementById("TaskLabelHeader");
+function updateTitle(){
+    let header = document.getElementById("TaskLabelHeader");
     if (header){
-        document.title = header.innerText
+        document.title = header.innerText;
+        return;
     }
+
+    let generalHeader = document.getElementsByClassName("page-header")[0];
+    if (generalHeader){
+        document.title = "ESP " + generalHeader.innerText;
+    }
+   document.title = document.title.replace("Word Editor - TaskDescription - ", "Text ")
 }
 
 // No more ViewState Errors. Horrible, Horrible Hack
@@ -65,7 +72,7 @@ var css = `
     NewWindowWithoutControls = OnlyTabs
 
     //Improve the tab title display
-    //fixTitle();
+    setTimeout(updateTitle, 500);
 
     // Clear the ViewState every 500ms
     //setInterval(clearViewState,500);
