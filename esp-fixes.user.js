@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ESP Fixes
 // @namespace    https://esp.eas-cpq.de/
-// @version      1.3
+// @version      1.4
 // @description  Collection of fixes for the EAS Service Portal
 // @updateURL    https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
 // @downloadURL  https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
@@ -59,14 +59,17 @@ var css = `
     'use strict';
 
     // Add custom CSS
-    addGlobalStyle(css);
+    //addGlobalStyle(css);
 
     // Never open Popup windows
     NewWindowWithoutControls = OnlyTabs
 
     //Improve the tab title display
-    fixTitle();
+    //fixTitle();
 
     // Clear the ViewState every 500ms
-    setInterval(clearViewState,500);
+    //setInterval(clearViewState,500);
+    $(document).ready(function(){
+        $('#__EVENTVALIDATION').attr('autocomplete', 'off');
+    });
 }());
