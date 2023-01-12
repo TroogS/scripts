@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ESP Fixes
 // @namespace    https://esp.eas-cpq.de/
-// @version      1.4
+// @version      1.5
 // @description  Collection of fixes for the EAS Service Portal
 // @updateURL    https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
 // @downloadURL  https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
