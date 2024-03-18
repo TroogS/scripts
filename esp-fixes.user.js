@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         ESP Fixes
 // @namespace    https://esp.eas-cpq.de/
-// @version      1.7
+// @version      1.8
 // @description  Collection of fixes for the EAS Service Portal
 // @updateURL    https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
 // @downloadURL  https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
 // @author       Marcel Fries
 // @match        https://esp.eas-cpq.de/*
+// @match        https://esp-new.eas-cpq.de/*
 // @grant GM_setValue
 // @grant GM_getValue
 // ==/UserScript==
@@ -69,7 +70,18 @@ var css = `
     //addGlobalStyle(css);
 
     // Never open Popup windows
-    NewWindowWithoutControls = OnlyTabs
+    console.log();
+    if (typeof NewWindowWithoutControls === "function") {
+        console.log("Reregistering NewWindowWithoutControls");
+        NewWindowWithoutControls = OnlyTabs;
+    }
+
+    if (typeof BlazorHelper === "object") {
+        if(typeof BlazorHelper.OpenLinkInPopup === "function") {
+            console.log("Reregistering OpenLinkInPopup");
+            BlazorHelper.OpenLinkInPopup = OnlyTabs;
+        }
+    }
 
     //Improve the tab title display
     setTimeout(updateTitle, 500);
