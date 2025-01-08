@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Inline Reddit images and Comment Redirect
 // @namespace    https://www.reddit.com
-// @version      2024-12-12
+// @version      2025-01-08
 // @description  Embed images posted as comments and redirect post links to comments
 // @author       luxick
 // @updateURL    https://raw.githubusercontent.com/luxick/scripts/master/reddit-image-inline.user.js
@@ -31,7 +31,17 @@
         let image = new Image();
         image.src = elem.href;
         image.style = "max-width: 300px";
-        elem.parentElement.appendChild(image);
+
+        // Create a new anchor element
+        let anchor = document.createElement('a');
+        anchor.href = elem.href;
+        anchor.target = '_blank'; // Opens in new tab
+
+        // Append the image to the anchor
+        anchor.appendChild(image);
+
+        // Add the anchor (containing the image) to the parent
+        elem.parentElement.appendChild(anchor);
         elem.remove();
     }
 
