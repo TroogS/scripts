@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Wahapedia Enhanced Search
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-23
+// @version      2025-02-14
 // @description  Enhances Wahapedia with Kagi image search and Warhammer.com search
 // @author       luxick
 // @updateURL    https://github.com/luxick/scripts/raw/master/whapedia-image-redirect.user.js
