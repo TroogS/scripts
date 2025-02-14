@@ -30,7 +30,7 @@
     // Function to create a Warhammer.com search button
     function createButton(modelName) {
         const warhammerButton = document.createElement('a');
-        warhammerButton.href = `https://www.warhammer.com/de-DE/plp?search=${encodeURIComponent(modelName)}`;
+        warhammerButton.href = `https://www.warhammer.com/en-gb/plp?search=${encodeURIComponent(modelName)}`;
         warhammerButton.className = 'dsButton';
         warhammerButton.target = '_blank';
 
