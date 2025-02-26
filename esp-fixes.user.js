@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         ESP Fixes
 // @namespace    https://esp.eas-cpq.de/
-// @version      1.8
+// @version      1.9
 // @description  Collection of fixes for the EAS Service Portal
 // @updateURL    https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
 // @downloadURL  https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
 // @author       Marcel Fries
 // @match        https://esp.eas-cpq.de/*
 // @match        https://esp-new.eas-cpq.de/*
+// @match        https://esp-wasm.eas-cpq.de/*
 // @grant GM_setValue
 // @grant GM_getValue
 // ==/UserScript==
@@ -49,17 +50,8 @@ function clearViewState(){
 }
 
 var css = `
-.sidebar {
-  flex 0 1 12%;
-  max-width: 200px;
-}
-
-.sidebar .panel-heading {
-  padding: 2px 10px;
-}
-
-.sidebar .nav > li > a {
-  padding: 0;
+.dxbs-gridview > .panel .dxbs-table > tbody > tr > td {
+  white-space: nowrap;
 }
 `;
 
@@ -67,7 +59,7 @@ var css = `
     'use strict';
 
     // Add custom CSS
-    //addGlobalStyle(css);
+    addGlobalStyle(css);
 
     // Never open Popup windows
     console.log();
