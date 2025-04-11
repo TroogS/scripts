@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ESP Fixes
 // @namespace    https://esp.eas-cpq.de/
-// @version      1.9
+// @version      1.10
 // @description  Collection of fixes for the EAS Service Portal
 // @updateURL    https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
 // @downloadURL  https://raw.githubusercontent.com/luxick/scripts/master/esp-fixes.user.js
@@ -23,15 +23,40 @@ function addGlobalStyle(css) {
     head.appendChild(style);
 }
 
+const headerReplacements = new Map([
+   ['(Mini Task)', ''],
+   ['(Minitask)', ''],
+   ['(Kein Mini Task)', ''],
+   ['(Kein MiniTask)', ''],
+]);
+
 
 // Force popups into new tabs instead
 function OnlyTabs(url, width, heigth) {
     window.open(url, "_blank");
 }
 
+// Case insensitive string replace
+String.prototype.replaces = function(str, replace) {
+    var strLower = this.toLowerCase();
+    var findLower = String(str).toLowerCase();
+    var strTemp = this.toString();
+
+    var pos = strLower.length;
+    while((pos = strLower.lastIndexOf(findLower, pos)) != -1){
+        strTemp = strTemp.substr(0, pos) + replace + strTemp.substr(pos + findLower.length);
+        pos--;
+    }
+    return strTemp;
+};
+
 // Set title of the tab to number and description of the task
 function updateTitle(){
     let header = document.getElementById("TaskLabelHeader");
+
+    headerReplacements.forEach(function(value,key) {header.innerText = header.innerText.replaces(key, value); })
+    header.innerText = header.innerText.trim();
+
     if (header){
         document.title = header.innerText;
         return;
